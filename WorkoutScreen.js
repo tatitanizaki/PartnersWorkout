@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-const WorkoutScreen = ({ workout }) => {
+const WorkoutScreen = ({ workout, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Today's Workout</Text>
@@ -9,6 +9,7 @@ const WorkoutScreen = ({ workout }) => {
       <Text style={styles.description}>{workout.description}</Text>
       <Text style={styles.movements}>Movements: {workout.movements.join(', ')}</Text>
       <Text style={styles.equipments}>Equipments: {workout.equipments.join(', ')}</Text>
+      <Button title="Next Workout" onPress={() => navigation.push('Home')} />
     </View>
   );
 };

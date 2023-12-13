@@ -2,6 +2,8 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 import WorkoutScreen from './WorkoutScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigator from './StackNavigator'
 
 // Sample workout data
 const workouts = [
@@ -23,10 +25,10 @@ const App = () => {
   const todayWorkout = getRandomWorkout();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <WorkoutScreen workout={todayWorkout} />
+    <NavigationContainer>
+      <StackNavigator />
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
