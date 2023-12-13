@@ -2,7 +2,12 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 const WorkoutScreen = ({ workout, navigation }) => {
-  return (
+    if (!workout) {
+        // Handle the case where workout is undefined
+        return <Text>No workout data available</Text>;
+      }
+  
+    return (
     <View style={styles.container}>
       <Text style={styles.title}>Today's Workout</Text>
       <Text style={styles.workoutName}>{workout.name}</Text>

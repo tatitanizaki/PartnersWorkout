@@ -17,9 +17,13 @@ const workouts = [
 
 const getRandomWorkout = () => {
   const randomIndex = Math.floor(Math.random() * workouts.length);
-  return workouts[randomIndex];
+  const defaultWorkout = {
+    name: 'Default Workout',
+    movements: [],
+    equipments: [],
+    description: 'No description available',
+  };
 };
-
 const App = () => {
   return (
     <NavigationContainer>
