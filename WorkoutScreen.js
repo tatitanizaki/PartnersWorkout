@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 const WorkoutScreen = ({ workout, navigation }) => {
-   // if (!workout) {
+    console.log(workout); // Log the workout object to the console
+    if (!workout) {
         // Handle the case where workout is undefined
-   //     return <Text>No workout data available</Text>;
-   //   }
+        return <Text>No workout data available</Text>;
+      }
   
     return (
     <View style={styles.container}>
