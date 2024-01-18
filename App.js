@@ -3,6 +3,26 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './StackNavigator';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCpH45QzbJM58jUvlCOBiJV6AbixYZxvko",
+  authDomain: "partners-workout.firebaseapp.com",
+  projectId: "partners-workout",
+  storageBucket: "partners-workout.appspot.com",
+  messagingSenderId: "480641770804",
+  appId: "1:480641770804:web:7ca21ea98fa333895bf161",
+  measurementId: "G-MJ0JGLKJ8V"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+// Create a Firestore reference
+const firestore = firebase.firestore();
 
 // Sample workout data
 const workouts = [
@@ -44,5 +64,6 @@ const styles = StyleSheet.create({
   },
 });
 
+export { firestore }; // Export the Firestore reference for use in other components
 export default App;
 
