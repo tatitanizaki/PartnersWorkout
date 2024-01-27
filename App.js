@@ -24,16 +24,24 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
-// Sample workout data
-const workouts = [
-  {
-    name: 'Test Workout',
-    movements: ['Box Jump', 'Burpee', 'Ground-to-Overhead', 'Pull-Up', 'Wall Ball'],
-    equipments: ['Barbell', 'Box', 'Medicine Ball', 'Pull-Up Bar'],
-    description: 'For Time (with a Partner)\n200 Box Jump Overs (24/20 in)\n150 Wall Balls (20/14 lb)\n100 Ground-to-Overheads (100/70 lb)\n75 Bar Over Burpees\n50 Pull-Ups\nPartition the work above any way',
-  },
-  // Add more workouts as needed
-];
+const App = () => {
+  const [workouts, setWorkouts] = useState([]);
+
+  useEffect(() => {
+    const fetchWorkouts = async () => {
+      try {
+        const workoutsCollectionRef = collection(db, 'workouts');
+        const querySnapshot = await getDocs(workoutsCollectionRef);
+        const workoutsData = querySnapshot.docs.map(doc => doc.data());
+        setWorkouts(workoutsData);
+      } catch (error) {
+        console.error("Error fetching workouts:", error);
+        // Handle the error appropriately
+      }
+    };
+
+    fetchWorkouts();
+  }, []);
 
 const getRandomWorkout = () => {
   const randomIndex = Math.floor(Math.random() * workouts.length);
@@ -44,7 +52,7 @@ const getRandomWorkout = () => {
     description: 'No description available',
   };
 };
-const App = () => {
+
   const todayWorkout = getRandomWorkout();
 
   return (
