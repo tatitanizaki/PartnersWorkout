@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './StackNavigator';
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
 
