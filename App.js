@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './StackNavigator';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -17,12 +19,11 @@ const firebaseConfig = {
   measurementId: "G-MJ0JGLKJ8V"
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-// Create a Firestore reference
-const firestore = firebase.firestore();
+// Initialize Firestore
+const db = getFirestore(app);
 
 // Sample workout data
 const workouts = [
@@ -64,6 +65,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export { firestore }; // Export the Firestore reference for use in other components
+export { db }; // Export the Firestore reference for use in other components
 export default App;
 
