@@ -1,3 +1,6 @@
+global.window = global.window || {};
+global.window.navigator = global.window.navigator || {};
+global.window.navigator.userAgent = "ReactNative";
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
