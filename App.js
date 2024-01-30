@@ -6,9 +6,13 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import StackNavigator from './StackNavigator';
+import { createStackNavigator } from '@react-navigation/stack';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfig'; // Import db from firebaseConfig
+import LoginScreen from './LoginScreen';
+import WorkoutScreen from './WorkoutScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -42,7 +46,10 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <StackNavigator workout={todayWorkout} />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Home" component={WorkoutScreen} />
+      </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
   );
