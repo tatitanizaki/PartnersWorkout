@@ -1,3 +1,4 @@
+// App.js
 global.window = global.window || {};
 global.window.navigator = global.window.navigator || {};
 global.window.navigator.userAgent = "ReactNative";
@@ -6,26 +7,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './StackNavigator';
-import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
-
-
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyCpH45QzbJM58jUvlCOBiJV6AbixYZxvko",
-  authDomain: "partners-workout.firebaseapp.com",
-  projectId: "partners-workout",
-  storageBucket: "partners-workout.appspot.com",
-  messagingSenderId: "480641770804",
-  appId: "1:480641770804:web:7ca21ea98fa333895bf161",
-  measurementId: "G-MJ0JGLKJ8V"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Firestore
-const db = getFirestore(app);
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './firebaseConfig'; // Import db from firebaseConfig
 
 const App = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -39,22 +22,21 @@ const App = () => {
         setWorkouts(workoutsData);
       } catch (error) {
         console.error("Error fetching workouts:", error);
-        // Handle the error appropriately
       }
     };
 
     fetchWorkouts();
   }, []);
 
-const getRandomWorkout = () => {
-  const randomIndex = Math.floor(Math.random() * workouts.length);
-  return workouts[randomIndex] || {
-    name: 'Default Workout',
-    movements: [],
-    equipments: [],
-    description: 'No description available',
+  const getRandomWorkout = () => {
+    const randomIndex = Math.floor(Math.random() * workouts.length);
+    return workouts[randomIndex] || {
+      name: 'Default Workout',
+      movements: [],
+      equipments: [],
+      description: 'No description available',
+    };
   };
-};
 
   const todayWorkout = getRandomWorkout();
 
@@ -75,6 +57,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export { db }; // Export the Firestore reference for use in other components
 export default App;
 
