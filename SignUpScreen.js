@@ -1,15 +1,17 @@
-// LoginScreen.js
+// SignUpScreen.js
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { signInWithEmail } from './AuthService'; // Adjust path as needed
+import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { signUpWithEmail } from './AuthService'; // Adjust the path as necessary
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // Add confirm password state
   const [error, setError] = useState('');
 
-  const handleLogin = async () => {
-    const errorMessage = await signInWithEmail(email, password);
+  const handleSignUp = async () => {
+    // Add confirm password logic if necessary
+    const errorMessage = await signUpWithEmail(email, password, navigation);
     if (errorMessage) {
       setError(errorMessage);
     }
@@ -17,14 +19,13 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Login</Text>
-      <Text style={styles.subheader}>Please sign in to continue.</Text>
+      <Text style={styles.header}>Create Account</Text>
+      <Text style={styles.subheader}>Please sign up to continue.</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        keyboardType="email-address"
         autoCapitalize="none"
       />
       <TextInput
@@ -35,18 +36,25 @@ const LoginScreen = ({ navigation }) => {
         secureTextEntry
         autoCapitalize="none"
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+        autoCapitalize="none"
+      />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={styles.link}>
-        <Text>Don't have an account? Sign up</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.link}>
+        <Text>Already have an account? Log In</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-// Add StyleSheet details based on your design
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -101,5 +109,4 @@ const styles = StyleSheet.create({
   });
   
 
-export default LoginScreen;
-
+export default SignUpScreen;

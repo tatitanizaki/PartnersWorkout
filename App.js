@@ -9,7 +9,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfig'; // Import db from firebaseConfig
-import LoginScreen from './LoginScreen';
+import StackNavigator from './StackNavigator';
+import WelcomeScreen from './WelcomeScreen';
 import WorkoutScreen from './WorkoutScreen';
 
 const Stack = createStackNavigator();
@@ -46,11 +47,8 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={WorkoutScreen} />
-      </Stack.Navigator>
-      <StatusBar style="auto" />
+    <StackNavigator />
+    <StatusBar style="auto" />
     </NavigationContainer>
   );
 };
